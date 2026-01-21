@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Базы данных
+*.db
+*.sqlite
+
+# Логи
+*.log
+*.txt
+
+# Системные файлы
+.DS_Store
+.env
+.idea/
+.vscode/
+
+# Временные файлы
+temp/
+tmp/
