@@ -7,7 +7,7 @@
 ### На локальном компьютере (Mac/Windows/Linux):
 ```bash
 # 1. Клонируйте репозиторий
-git clone https://github.com/ваш-username/ASinglePoint_Bot.git
+git clone https://github.com/gokov11/ASinglePoint_Bot.git
 cd ASinglePoint_Bot
 
 # 2. Установите зависимости
@@ -19,7 +19,7 @@ python3 bot.py
 
 ### На сервере (Ubuntu/Debian) одной командой:
 ```bash
-git clone https://github.com/ваш-username/ASinglePoint_Bot.git && cd ASinglePoint_Bot && pip3 install -r requirements.txt && python3 bot.py
+git clone https://github.com/gokov11/ASinglePoint_Bot.git && cd ASinglePoint_Bot && pip3 install -r requirements.txt && python3 bot.py
 ```
 
 ## ⚙️ Настройка

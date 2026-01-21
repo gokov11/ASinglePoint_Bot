@@ -1,3 +1,40 @@
+# ==================== КРИТИЧЕСКИЕ ИЗМЕНЕНИЯ ДЛЯ RENDER ====================
+import os
+import asyncio
+import logging
+from aiohttp import web
+import threading
+
+# Настройка для Render
+PORT = int(os.environ.get("PORT", 8080))  # Render предоставляет порт через переменную окружения
+
+# Создаем простой веб-сервер для проверки здоровья (health check)
+async def health_check(request):
+    return web.Response(text="Bot is running")
+
+# Запуск веб-сервера в отдельном потоке
+def run_web_server():
+    app = web.Application()
+    app.router.add_get('/', health_check)
+    app.router.add_get('/health', health_check)
+    
+    runner = web.AppRunner(app)
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
+    async def start_server():
+        await runner.setup()
+        site = web.TCPSite(runner, '0.0.0.0', PORT)
+        await site.start()
+        print(f"🌐 Web server started on port {PORT}")
+    
+    loop.run_until_complete(start_server())
+    loop.run_forever()
+
+# Запускаем веб-сервер в фоновом потоке
+web_thread = threading.Thread(target=run_web_server, daemon=True)
+web_thread.start()
+# ==========================================================================
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types, F
@@ -19,7 +56,7 @@ from typing import Dict, List, Tuple
 import random
 
 # ==================== НАСТРОЙКИ ====================
-API_TOKEN = '8393104234:AAGwcbmK8qlxiIzcJIPIqeo3JAz8tBNuYfo'
+API_TOKEN = os.getenv('TELEGRAM_TOKEN', '8393104234:AAGwcbmK8qlxiIzcJIPIqeo3JAz8tBNuYfo')
 DATABASE = 'asinglepoint.db'
 MOSCOW_TZ = pytz.timezone('Europe/Moscow')
 # ===================================================
